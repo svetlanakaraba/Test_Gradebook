@@ -1,0 +1,88 @@
+{
+    "Headers": {
+    "Register": ".nav-link",
+    "SignIn": ".nav-link",
+    "Professor": ".nav-link",
+    "CreateGB": ".nav-link",
+    "MyGB": ".nav-link",
+    "Gradebooks": ".nav-link"
+},
+"Register": {
+    "FirstName": "#firstName",
+    "LastName": "#lastName",
+    "Email": "#email",
+    "Password": "#password",
+    "PasswordConf": "#passwordConfirmation",
+    "Tearms": "#termsAndConditions",
+    "Submit": ".btn",
+    "Poruka": ".alert",
+    "SignOut": ".nav-item",
+    "TextTitle": ".h3"
+},
+"SignIn": {
+    "Email": ".form-control",
+    "Password": ".form-control",
+    "Login": ".btn",
+    "Message": ".alert",
+    "TextTitle": ".form-signin-heading",
+    "Title": ".h3",
+    "SignOut": ".nav-item"
+},
+"Professor": {
+    "CreateProf": ".dropdown-item",
+    "AllProf": ".dropdown-item",
+    "FirstName": "#firstName",
+    "LastName": "#lastName",
+    "AddImage": ".btn",
+    "Url": ".form-control",
+    "Submit": ".btn",
+    "TextTitle": ".h3",
+    "MoveUp": ".btn",
+    "MoveDown": ".btn",
+    "Remove": ".btn",
+    "Filter": ".form-control",
+    "Table": ".table"
+},
+"CreateGB": {
+    "Title": "#title",
+    "Professor": "#professor",
+    "Submit": ".btn",
+    "TextTitle": ".h3",
+    "Table": ".table",
+    "Message": ".alert"
+},
+"MyGB": {
+    "TextTitle": ".h3",
+    "AddStudent": ".btn",
+    "FirstName": "#firstName",
+    "LastName": "#lastName",
+    "AddImage": ".btn",
+    "Url": ".form-control",
+    "Submit": ".btn",
+    "Comment": ".comments-box",
+    "Table": ".table",
+    "MoveUp": ".btn",
+    "MoveDown": ".btn",
+    "Remove": ".btn",
+    "Edit": ".btn",
+    "Title": "#title",
+    "TextBox": ".form-control",
+    "Delete": ".btn",
+    "Message": ".alert"
+},
+"Gradebooks": {
+    "TextTitle": ".h3",
+    "Filter": ".form-control",
+    "Search": ".btn",
+    "Table": ".table",
+    "Next": ".btn",
+    "Previous": ".btn",
+    "AddStudent": ".btn",
+    "Message": ".alert",
+    "Edit": ".btn",
+    "Delete": ".btn"
+}
+
+
+
+}

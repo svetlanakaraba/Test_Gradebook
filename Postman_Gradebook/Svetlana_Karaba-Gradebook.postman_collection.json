@@ -1,0 +1,2721 @@
+{
+	"info": {
+		"_postman_id": "d75c7619-1811-4a41-afe8-3e1a09c06198",
+		"name": "Svetlana_Karaba-Gradebook",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"item": [
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "06c53bc6-64b7-47ae-8fc2-a14a039658e1",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\":\"{{firstName}}\",\n\t\"lastName\":\"{{lastName}}\",\n\t\"email\":\"{{email}}\",\n\t\"password\":\"{{password}}\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register, another user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "912f638b-5a39-4d58-bf67-3129ed11de16",
+								"exec": [
+									"var email = \"Neko\" + _.random(1, 1000000) + \"@example.com\"",
+									"pm.environment.set(\"email2\", email);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "2dbfc253-4a4a-4ede-ac7b-2c027c1148e3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\":\"Neko\",\n\t\"lastName\":\"Nesto\",\n\t\"email\":\"nekimail@mailinator.com\",\n\t\"password\":\"1234neki\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N -Register without First Name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "90b30dff-991e-484c-b67f-1bf1ae5c2586",
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Column 'firstName' cannot be null\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"lastName\":\"Karaba\",\n\t\"email\":\"svetlanatest@mailinator.com\",\n\t\"password\":\"1234test\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N-Register without Last Name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f66bbc9a-499b-45b3-9e34-7f3ac4265859",
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Column 'lastName' cannot be null\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\":\"Svetlana\",\n\t\"email\":\"svetlanatest@mailinator.com\",\n\t\"password\":\"1234test\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N - Register without password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8f615324-fce0-4f7f-a177-0025132bf46c",
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\":\"Svetlana\",\n\t\"lastName\":\"Karaba\",\n\t\"email\":\"svetlanatest@mailinator.com\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N - Register without email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ce970cc9-aa23-4cc9-bb31-d28233a714dd",
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\":\"Svetlana\",\n\t\"lastName\":\"Karaba\",\n\t\"password\":\"1234test\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sign in",
+			"item": [
+				{
+					"name": "Sign in",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7838de8b-ecc8-461c-b098-bf14e2629d3f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"var token = jsonData.token;",
+									"pm.environment.set(\"token\", token);",
+									"",
+									"var user_id = jsonData.user.id;",
+									"pm.environment.set(\"user_id\", user_id);",
+									"",
+									"var user_firstName = jsonData.user.firstName;",
+									"pm.environment.set(\"firstName\", user_firstName);",
+									"",
+									"var user_lastName = jsonData.user.lastName;",
+									"pm.environment.set(\"lastName\", user_lastName);",
+									"",
+									"var user_email = jsonData.user.email;",
+									"pm.environment.set(\"email\", user_email);",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"{{email}}\",\n\t\"password\":\"{{password}}\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Sign in, another user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c3f63494-64ad-40d3-8d05-155b2d8efef9",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"var token = jsonData.token;",
+									"pm.environment.set(\"token2\", token);",
+									"",
+									"var user_id = jsonData.user.id;",
+									"pm.environment.set(\"user_id2\", user_id);",
+									"",
+									"var user_firstName = jsonData.user.firstName;",
+									"pm.environment.set(\"firstName2\", user_firstName);",
+									"",
+									"var user_lastName = jsonData.user.lastName;",
+									"pm.environment.set(\"lastName2\", user_lastName);",
+									"",
+									"var user_email = jsonData.user.email;",
+									"pm.environment.set(\"email2\", user_email);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"nekimail@mailinator.com\",\n\t\"password\":\"1234neki\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N - Login without email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6b0b57be-789c-4599-b37f-7477874b050e",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"invalid_credentials\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"password\":\"1234test\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N - Login with invalid email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "aad00161-b7ca-4788-9627-4bc97c845f50",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"invalid_credentials\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"svetlana@mailinator.com\",\n\t\"password\":\"1234test\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N - Login without password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ec89a776-c71a-4584-9a86-9b181bfe45fa",
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Undefined index: password\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"svetlanatest@mailinator.com\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N - Login with invalid password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d7699ed-727a-4e30-ab25-97f0168d5d71",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"invalid_credentials\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"svetlanatest@mailinator.com\",\n\t\"password\":\"12345678\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Professors",
+			"item": [
+				{
+					"name": "Click on Create Professors link",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "22c4d79c-e5b0-42d4-8812-b5fac2527623",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/diaries?page=undefined",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"diaries"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "undefined"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Professor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ead9ce49-7655-43a2-8471-0c2c774c3e45",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"url\":[\"https://thumbs.dreamstime.com/z/professor-lecturer-illustration-cartoon-isolated-personage-34508406.jpg\"],\n\t\"firstName\":\"{{firstName}}\",\n\t\"lastName\":\"{{lastName}}\",\n\t\"diary_id\":\"\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/professors",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"professors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Professor with 3 image url",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "119a2de2-bf08-48fa-a76f-46ecb8ec6d07",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"url\":[\"https://www.nicepng.com/png/detail/354-3544353_professor-smartenstein-cartoon-professor.png\",\n\t\"https://i.pinimg.com/originals/84/73/20/847320549b5c942b8484d6a76fc48d33.jpg\",\n\t\"https://thumbs.dreamstime.com/z/professor-lecturer-illustration-cartoon-isolated-personage-34508406.jpg\"],\n\t\"firstName\":\"{{firstName}}\",\n\t\"lastName\":\"{{lastName}}\",\n\t\"diary_id\":\"\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/professors",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"professors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Click on All Professors link",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "45976f05-2e49-4d9f-ac6c-d4c5292d36e3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"var idProfesora = pm.variables.get(\"user_id\");",
+									"",
+									"var idExist = false;",
+									"",
+									"for (i = 0; i < jsonData.id; i++) {",
+									"  ",
+									"  if (jsonData.id === idProfesora) {",
+									"      idExist = true;",
+									"  }",
+									"}",
+									"",
+									"tests[\"Professor is created\"] = idExist === false;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/professors",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"professors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N - Create Professor without First Name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8a8dc513-a555-4514-8ab7-27ea89670a1e",
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Column 'firstName' cannot be null\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"url\":[\"https://thumbs.dreamstime.com/z/professor-lecturer-illustration-cartoon-isolated-personage-34508406.jpg\"],\n\t\"lastName\":\"Karaba\",\n\t\"diary_id\":\"\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/professors",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"professors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N - Create Professor without Last Name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ed27b682-4ed4-416e-a133-27c83974bc63",
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Column 'lastName' cannot be null\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"url\":[\"https://thumbs.dreamstime.com/z/professor-lecturer-illustration-cartoon-isolated-personage-34508406.jpg\"],\n\t\"firstName\":\"Svetlana\",\n\t\"diary_id\":\"\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/professors",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"professors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N - Create Professor without image url",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "61026359-cfaf-4885-89fc-8c4545e7b936",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"The given data was invalid.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\":\"Svetlana\",\n\t\"lastName\":\"Karaba\",\n\t\"diary_id\":\"\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/professors",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"professors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N - Create Professor with invalid image type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ae53cb22-3acf-4a7d-817a-8e65ec2f9367",
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"url\":[\"https://www.clipartmax.com/png/middle/33-338688_most-popular-categories-lecturer-cartoon\"],\n\t\"firstName\":\"Svetlana\",\n\t\"lastName\":\"Karaba\",\n\t\"diary_id\":\"\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/professors",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"professors"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create Gradebook",
+			"item": [
+				{
+					"name": "Click on Create Gradebook link",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f5e44fd4-ac6f-4bf8-b7af-b6e25b52e711",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/professors",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"professors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Gradebook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4958e8df-5349-4faf-991d-a4e921f2b8e5",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"var professor_id = jsonData.professor_id;",
+									"pm.environment.set(\"professor_id\", professor_id);",
+									"",
+									"var id = jsonData.id;",
+									"pm.environment.set(\"diary_id\", id);",
+									"",
+									"var title = pm.environment.get(\"title\");",
+									"tests[\"Title is: \" + jsonData.title] = jsonData.title === title;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\":\"{{title}}\",\n\t\"professor_id\":{{user_id}}\n\t\n}"
+						},
+						"url": {
+							"raw": "https://gradebook-api.vivifyideas.com/api/diaries",
+							"protocol": "https",
+							"host": [
+								"gradebook-api",
+								"vivifyideas",
+								"com"
+							],
+							"path": [
+								"api",
+								"diaries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N - Create Gradebook with empty field",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "00e9922a-da18-417f-97f4-eaaca0bd7972",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"The given data was invalid.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/diaries",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"diaries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N - Create Gradebook without Gradebook title",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "1b1b6ec8-1cb5-4ad9-bf38-e8aa865a3710",
+								"exec": [
+									"pm.test(\"Status code is 422\", function () {",
+									"    pm.response.to.have.status(422);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"The given data was invalid.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"professor_id\":1562\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/diaries",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"diaries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N - Create Gradebook without Professor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9d150d55-e8df-4e33-9c66-37a320e03f81",
+								"exec": [
+									"pm.test(\"Response time is less than 422ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(422);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"The given data was invalid.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\":\"High School\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/diaries",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"diaries"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "My Gradebook",
+			"item": [
+				{
+					"name": "Click on My Gradebook link",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4a99abd9-b85b-4cf0-95a2-c36020844b75",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"var title = pm.environment.get(\"title\");",
+									"tests[\"title:\" + jsonData.title] = jsonData.title === title;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/diaries/my-diary/{{user_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"diaries",
+								"my-diary",
+								"{{user_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Click on Add Student button",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2cbbd7fd-ee4f-4aa3-8aeb-0c78c9e1a912",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/diaries/{{diary_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"diaries",
+								"{{diary_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Student",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bd9ec31b-32d2-434e-8f36-d96795c5c9ab",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\":\"WallE\",\n\t\"lastName\":\"Pixar\",\n\t\"url\":[\"https://https://cdn.vox-cdn.com/thumbor/zhOkikt7GAARV1YDAYwNQQzeopw=/0x0:1200x808/1400x1400/filters:focal(475x111:667x303):format(jpeg)/cdn.vox-cdn.com/uploads/chorus_image/image/55061013/wall_ecover.0.jpg\"]\n\t\n}"
+						},
+						"url": {
+							"raw": "https://gradebook-api.vivifyideas.com/api/diaries/{{diary_id}}/students",
+							"protocol": "https",
+							"host": [
+								"gradebook-api",
+								"vivifyideas",
+								"com"
+							],
+							"path": [
+								"api",
+								"diaries",
+								"{{diary_id}}",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Student with 2 image url",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "667ed54c-0e2b-46f7-8e61-34648a919f9c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\":\"Lego\",\n\t\"lastName\":\"Creator\",\n\t\"url\":[\"https://e2k9ube.cloudimg.io/s/cdn/x/https://edienet.s3.amazonaws.com/news/images/full_39190.jpg\",\n\t\"https://sspeterandpaulsblog.net/4s20/wp-content/uploads/sites/100/2020/06/LEGO.png\"]\n\t\n}"
+						},
+						"url": {
+							"raw": "https://gradebook-api.vivifyideas.com/api/diaries/{{diary_id}}/students",
+							"protocol": "https",
+							"host": [
+								"gradebook-api",
+								"vivifyideas",
+								"com"
+							],
+							"path": [
+								"api",
+								"diaries",
+								"{{diary_id}}",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Click on Edit Gradebook button",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d3562b95-80a8-4d5d-b592-c0f911859179",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/professors",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"professors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Gradebook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6f088ef4-6e15-4695-89ce-44ba4c94dd70",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"var title_edit = pm.environment.get(\"title_edit\");",
+									"tests[\"Edit title is: \" + jsonData.title] = jsonData.title === title_edit;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":{{diary_id}},\n\t\"title\":\"{{title_edit}}\",\n\t\"professor_id\":11,\n\t\"created_at\":\"2020-10-20 17:02:57\",\n\t\"updated_at\":\"2020-10-20 17:02:57\",\n\t\"professor\":\n\t{\"id\":11,\"user_id\":11,\"url\":null,\"created_at\":\"2020-10-20 16:09:06\",\"updated_at\":\"2020-10-20 16:09:06\",\"user\":{\"id\":11,\"firstName\":\"Svetlana\",\"lastName\":\"Karaba\",\"email\":\"svetlanatest@mailinator.com\",\"email_verified_at\":\"2020-10-20 16:09:06\",\"termsAndConditions\":null,\"created_at\":\"2020-10-20 16:09:06\",\"updated_at\":\"2020-10-20 16:09:06\"}},\"students\":[{\"id\":20,\"firstName\":\"{{student_firstName}}\",\"lastName\":\"Pixar\",\"diary_id\":17,\"created_at\":\"2020-10-20 17:07:19\",\"updated_at\":\"2020-10-20 17:07:19\"},{\"id\":21,\"firstName\":\"Lego\",\"lastName\":\"Creator\",\"diary_id\":17,\"created_at\":\"2020-10-20 17:07:55\",\"updated_at\":\"2020-10-20 17:07:55\"}],\"comments\":[]\n\t\t\n\t}"
+						},
+						"url": {
+							"raw": "https://gradebook-api.vivifyideas.com/api/diaries/{{diary_id}}",
+							"protocol": "https",
+							"host": [
+								"gradebook-api",
+								"vivifyideas",
+								"com"
+							],
+							"path": [
+								"api",
+								"diaries",
+								"{{diary_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Comments with 255 characters",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4446ba83-7726-439d-82d3-45636f48f520",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"var id = jsonData.id;",
+									"pm.environment.set(\"comment_id\", id);",
+									"",
+									"var comment = pm.environment.get(\"text\");",
+									"tests[\"Comment is: \" + jsonData.text] = jsonData.title === comment;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\":\"{{comment}}\",\n\t\"user_id\":{{user_id}}\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/diaries/{{diary_id}}/comments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"diaries",
+								"{{diary_id}}",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Comments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f240ac22-21f5-4420-a747-1a43435e02a7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/comments/{{comment_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"comments",
+								"{{comment_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Gradebook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "03eb2f17-a8f9-4e3e-baec-aed68da81b19",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/diaries/{{diary_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"diaries",
+								"{{diary_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Checking of deleting Gradebook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6cc420be-be45-47b9-971e-91abff4b2855",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"var idGradebook = pm.variables.get(\"user_id\");",
+									"",
+									"var idExist = false;",
+									"",
+									"for (i = 0; i < jsonData.id; i++) {",
+									"  ",
+									"  if (jsonData.id === idProfesora) {",
+									"      idExist = true;",
+									"  }",
+									"}",
+									"",
+									"tests[\"Gradebook is deleted\"] = idExist === false;",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/diaries?page=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"diaries"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N - Create Student without First Name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "af9a2014-e8e7-4a5a-9b0f-0399b8e1afbb",
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Column 'firstName' cannot be null\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"lastName\":\"Pixar\",\n\t\"url\":[\"https://https://cdn.vox-cdn.com/thumbor/zhOkikt7GAARV1YDAYwNQQzeopw=/0x0:1200x808/1400x1400/filters:focal(475x111:667x303):format(jpeg)/cdn.vox-cdn.com/uploads/chorus_image/image/55061013/wall_ecover.0.jpg\"]\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/diaries/{{diary_id}}/students",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"diaries",
+								"{{diary_id}}",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N - Create Student without Last Name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ea53a33d-d6e1-47f1-833e-3524e8737d42",
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Column 'lastName' cannot be null\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\":\"WallE\",\n\t\"url\":[\"https://https://cdn.vox-cdn.com/thumbor/zhOkikt7GAARV1YDAYwNQQzeopw=/0x0:1200x808/1400x1400/filters:focal(475x111:667x303):format(jpeg)/cdn.vox-cdn.com/uploads/chorus_image/image/55061013/wall_ecover.0.jpg\"]\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/diaries/{{diary_id}}/students",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"diaries",
+								"{{diary_id}}",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N - Create Student without image url",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f9a16b30-8f5e-4af2-9961-8a05aeb16140",
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Invalid argument supplied for foreach()\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\":\"WallE\",\n\t\"lastName\":\"Pixar\"\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/diaries/{{diary_id}}/students",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"diaries",
+								"{{diary_id}}",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N - Edit Gradebook without Gradebook title ",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a48dfbfa-5871-4342-aa57-1b14e8e17278",
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Creating default object from empty value\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\"id\":1184,\n\t\"professor_id\":1562,\n\t\"created_at\":\"2020-10-18 10:47:32\",\n\t\"updated_at\":\"2020-10-18 13:51:59\",\n\t\"professor\":{\"id\":1562,\"user_id\":1562,\"url\":null,\"created_at\":\"2020-10-16 17:19:21\",\"updated_at\":\"2020-10-16 17:19:21\",\"user\":{\"id\":1562,\"firstName\":\"Svetlana\",\"lastName\":\"Karaba\",\"email\":\"svetlanatest@mailinator.com\",\"email_verified_at\":\"2020-10-16 17:19:21\",\"termsAndConditions\":null,\"created_at\":\"2020-10-16 17:19:21\",\"updated_at\":\"2020-10-16 17:19:21\"}},\"students\":[{\"id\":619,\"firstName\":\"WallE\",\"lastName\":\"Pixar\",\"diary_id\":1184,\"created_at\":\"2020-10-18 10:54:04\",\"updated_at\":\"2020-10-18 10:54:04\"},{\"id\":620,\"firstName\":\"Lego\",\"lastName\":\"Creator\",\"diary_id\":1184,\"created_at\":\"2020-10-18 11:06:29\",\"updated_at\":\"2020-10-18 11:06:29\"},{\"id\":621,\"firstName\":\"Lego\",\"lastName\":\"Creator\",\"diary_id\":1184,\"created_at\":\"2020-10-18 11:33:43\",\"updated_at\":\"2020-10-18 11:33:43\"},{\"id\":624,\"firstName\":\"WallE\",\"lastName\":\"Pixar\",\"diary_id\":1184,\"created_at\":\"2020-10-18 13:28:23\",\"updated_at\":\"2020-10-18 13:28:23\"},{\"id\":625,\"firstName\":\"WallE\",\"lastName\":\"Pixar\",\"diary_id\":1184,\"created_at\":\"2020-10-18 13:31:39\",\"updated_at\":\"2020-10-18 13:31:39\"},{\"id\":626,\"firstName\":\"Lego\",\"lastName\":\"Creator\",\"diary_id\":1184,\"created_at\":\"2020-10-18 13:40:03\",\"updated_at\":\"2020-10-18 13:40:03\"},{\"id\":627,\"firstName\":\"Lego\",\"lastName\":\"Creator\",\"diary_id\":1184,\"created_at\":\"2020-10-18 13:42:01\",\"updated_at\":\"2020-10-18 13:42:01\"},{\"id\":628,\"firstName\":\"Lego\",\"lastName\":\"Creator\",\"diary_id\":1184,\"created_at\":\"2020-10-18 13:42:32\",\"updated_at\":\"2020-10-18 13:42:32\"}],\"comments\":[]"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/diaries/{{diary_id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"diaries",
+								"{{diary_id}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N - Add Comments with 256 characters",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "84b677d0-1678-4a5b-ae83-2309339ab984",
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});",
+									"",
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.text()).to.include(\"Data too long for column 'text' at row 1\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"text\":\"Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, ssvvddl\",\n\t\"user_id\":1562\n\t\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/diaries/{{diary_id}}/comments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"diaries",
+								"{{diary_id}}",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Gradebooks",
+			"item": [
+				{
+					"name": "Click on Gradebooks link",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7e4f9fdd-38d1-4d75-bc6e-47efd41a4396",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/diaries?page=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"diaries"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gradebook Filter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b461feb3-6491-4af2-8dc7-4480b3ff53b5",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									"var idGradebook = pm.variables.get(\"user_id\");",
+									"",
+									"var idExist = false;",
+									"",
+									"for (i = 0; i < jsonData.id; i++) {",
+									"  ",
+									"  if (jsonData.id === idProfesora) {",
+									"      idExist = true;",
+									"  }",
+									"}",
+									"",
+									"tests[\"Gradebook was found\"] = idExist === false;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/search?search_term=High%20School&page=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "search_term",
+									"value": "High%20School"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gradebook Pagination, Next button",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "032406c5-210a-43c8-b178-780f4bdce3f3",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"var data = jsonData.data;",
+									"",
+									"pm.test(\"Check the length of the gradebooks is equal to 10\", function () {",
+									"     pm.expect(jsonData.data).to.have.lengthOf(10);",
+									"});",
+									"",
+									"var current_page = jsonData.current_page;",
+									"tests[\"Page number is: \" + jsonData.current_page] = jsonData.current_page === 2;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/search?search_term=&page=2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "search_term",
+									"value": ""
+								},
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gradebook Pagination, Previous button",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "622f4b33-92fc-4904-b68b-91a2db96c53e",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"var data = jsonData.data;",
+									"",
+									"pm.test(\"Check the length of the gradebooks is equal to 10\", function () {",
+									"     pm.expect(jsonData.data).to.have.lengthOf(10);",
+									"});",
+									"",
+									"var current_page = jsonData.current_page;",
+									"tests[\"Page number is: \" + jsonData.current_page] = jsonData.current_page === 1;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/search?search_term=&page=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "search_term",
+									"value": ""
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Single Professor Page",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7e2b433d-4453-49f2-9b1e-9ea3dab87a56",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"var user_id = jsonData.user_id;",
+									"pm.environment.set(\"user_id3\", user_id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/professors/{{user_id3}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"professors",
+								"{{user_id3}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N - User can Add a student to another user Gradebook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3568a901-c39d-4b71-821a-d1724a4a1f98",
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer{{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\":\"WallE\",\n\t\"lastName\":\"Pixar\",\n\t\"url\":[\"https://https://cdn.vox-cdn.com/thumbor/zhOkikt7GAARV1YDAYwNQQzeopw=/0x0:1200x808/1400x1400/filters:focal(475x111:667x303):format(jpeg)/cdn.vox-cdn.com/uploads/chorus_image/image/55061013/wall_ecover.0.jpg\"]\n\t\n}"
+						},
+						"url": {
+							"raw": "https://gradebook-api.vivifyideas.com/api/diaries/4/students",
+							"protocol": "https",
+							"host": [
+								"gradebook-api",
+								"vivifyideas",
+								"com"
+							],
+							"path": [
+								"api",
+								"diaries",
+								"4",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N - User can Edit another user Gradebook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "64cb363c-3cdf-4cfc-b2b0-b589b1b70576",
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer{{token}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":4,\n\t\"title\":\"Zamena\",\n\t\"professor_id\":11,\n\t\"created_at\":\"2020-10-20 13:57:09\",\n\t\"updated_at\":\"2020-10-20 16:44:52\",\n\t\"professor\":\n\t{\"id\":1,\"user_id\":1,\"url\":null,\"created_at\":\"2020-10-20 08:26:48\",\"updated_at\":\"2020-10-20 08:26:48\",\"user\":{\"id\":1,\"firstName\":\"buba\",\"lastName\":\"mara\",\"email\":\"bubamara@gmail.com\",\"email_verified_at\":\"2020-10-20 08:26:48\",\"termsAndConditions\":null,\"created_at\":\"2020-10-20 08:26:48\",\"updated_at\":\"2020-10-20 08:26:48\"}},\"students\":[{\"id\":15,\"firstName\":\"WallE\",\"lastName\":\"Pixar\",\"diary_id\":4,\"created_at\":\"2020-10-20 16:27:06\",\"updated_at\":\"2020-10-20 16:27:06\"},{\"id\":17,\"firstName\":\"WallE\",\"lastName\":\"Pixar\",\"diary_id\":4,\"created_at\":\"2020-10-20 16:45:58\",\"updated_at\":\"2020-10-20 16:45:58\"},{\"id\":18,\"firstName\":\"WallE\",\"lastName\":\"Pixar\",\"diary_id\":4,\"created_at\":\"2020-10-20 16:48:28\",\"updated_at\":\"2020-10-20 16:48:28\"}],\"comments\":[]\n\t\t\n\t}"
+						},
+						"url": {
+							"raw": "https://gradebook-api.vivifyideas.com/api/diaries/4",
+							"protocol": "https",
+							"host": [
+								"gradebook-api",
+								"vivifyideas",
+								"com"
+							],
+							"path": [
+								"api",
+								"diaries",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "N - User can Delete another user Gradebook",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "46c469fb-b585-45f2-89a3-d9d362f10fdb",
+								"exec": [
+									"pm.test(\"Status code is 500\", function () {",
+									"    pm.response.to.have.status(500);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer{{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://gradebook-api.vivifyideas.com/api/diaries/4",
+							"protocol": "https",
+							"host": [
+								"gradebook-api",
+								"vivifyideas",
+								"com"
+							],
+							"path": [
+								"api",
+								"diaries",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
